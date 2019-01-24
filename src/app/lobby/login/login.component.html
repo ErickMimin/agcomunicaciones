@@ -1,0 +1,25 @@
+<form class="col s12" [formGroup]="loginForm" (submit)="login($event)">
+  <div class="row">
+    <div class="col s12">
+      <h2 style="font-size: 5vh" class="font-white m-0 center-align">Bienvenido!</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field big-field col s6 offset-s3">
+      <i class="material-icons prefix">person</i>
+      <input formControlName="user" type="text" placeholder="Usuario">
+    </div>
+    <div class="input-field big-field col s6 offset-s3">
+      <i class="material-icons prefix">lock</i>
+      <input formControlName="password" type="password" placeholder="Contraseña">
+    </div>
+  </div>
+  <div class="row">
+    <button type="submit" class="waves-effect waves-light btn 
+    blue accent-1 btn-ag-sec
+    col s4 offset-s4"> Iniciar sesión </button>
+      <a class="col s6 offset-s3 right-align forgot-pass" [routerLink]="['recovery']">
+        Olvidé mi contraseña
+      </a>
+  </div>
+</form>

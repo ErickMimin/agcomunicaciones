@@ -1,0 +1,13 @@
+.main-container{
+    width: 100%;
+    height: calc(100vh - 6rem);
+    margin-bottom: 0;
+    overflow-y: auto;
+}
+
+@media only screen and (min-width: 992px){
+    .main-container{
+        float: right;
+        width: calc(100% - 18.75rem);
+    }
+}

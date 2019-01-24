@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="card form-container" [formGroup]="form">
+    <div class="row m-0" formGroupName="user">
+      <div class="col m6 s12">
+        <h5 class="font-blue">{{ user.nombre_Usuario }}</h5>
+      </div>
+      <div class="input-field col m6 s12">
+        <input placeholder="Nombre" type="text"  formControlName="nombre">
+        <label class="active">Nombre</label>
+      </div>
+      <div class="input-field col m6 s12">
+        <input placeholder="Apellido paterno" type="text" formControlName="apellido_Paterno">
+        <label class="active">Apellido paterno</label>
+      </div>
+      <div class="input-field col m6 s12">
+        <input placeholder="Apellido materno" type="text" formControlName="apellido_Materno">
+        <label class="active">Apellido materno</label>
+      </div>
+      <div class="col m6 s12 mt-16">
+        <label class="col s6">
+          <input type="checkbox" class="filled-in" [checked]="user.person == 1" (change)="togglePerson()"/>
+          <span>Persona Física</span>
+        </label>
+        <label class="col s6">
+          <input type="checkbox" class="filled-in" [checked]="user.person == 2" (change)="togglePerson()"/>
+          <span>Persona Moral</span>
+        </label>
+      </div>
+      <div class="input-field col m6 s12">
+        <input placeholder="RFC" type="text">
+        <label class="active">RFC</label>
+      </div>
+      <div class="input-field col m6 s12">
+        <input placeholder="Razón social" type="text">
+        <label class="active">Razón social</label>
+      </div>
+    </div><!--  User data -->
+    <div class="row" formGroupName="user">
+      <div class="col s12">
+        <h5 class="font-blue">Contacto</h5>
+      </div>
+      <div class="input-field col m5 s12">
+        <input placeholder="Teléfono" type="tel" formControlName="telefono">
+        <label class="active">Teléfono</label>
+      </div>
+      <div class="input-field col m7 s12" formGroupName="carrier">
+        <select formControlName="id">
+          <option value="" disabled selected>-Seleccione-</option>
+          <option *ngFor="let carrier of carriers" [value]="carrier.id">{{ carrier.nombre }}</option>
+        </select>
+        <label>Carrier (Compañia)</label>
+      </div>
+      <div class="input-field col m5 s12">
+        <input placeholder="Email" type="email" formControlName="email">
+        <label class="active">Email</label>
+      </div>
+      <div class="col m7 s12 valign-wrapper" formGroupName="rol">
+        <div class="input-field col s5" >
+          <select formControlName="id">
+            <option value="" disabled selected>-Seleccione-</option>
+            <option *ngFor="let rol of rolls" [value]="rol.id">{{ rol.nombre }}</option>
+          </select>
+          <label>Rol (Permisos)</label>
+        </div>
+        <label class="col s7">
+          <input type="checkbox" class="filled-in"/>
+          <span>Permisos personalizados</span>
+        </label>
+      </div>
+    </div> <!-- Contact data -->
+    <div class="row">
+      <div class="col m10 offset-m1 s12">
+        <h5 style="border-bottom: 1px solid #9e9e9e" class="pb-8 col s12">Módulos</h5>
+        <table class="col s12 striped responsive-table">
+          <thead>
+            <tr>
+              <td>Nombre</td>
+              <td>Solo lectura</td>
+              <td>Lectura y escritura</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Usuarios</td>
+              <td>
+                <label>
+                  <input type="checkbox" class="filled-in"/>
+                  <span>L</span>
+                </label>
+              </td>
+              <td>
+                <label>
+                  <input type="checkbox" class="filled-in"/>
+                  <span>E</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Roles</td>
+              <td>
+                <label>
+                  <input type="checkbox" class="filled-in"/>
+                  <span>L</span>
+                </label>
+              </td>
+              <td>
+                <label>
+                  <input type="checkbox" class="filled-in"/>
+                  <span>E</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Ventas y recargas</td>
+              <td>
+                <label>
+                  <input type="checkbox" class="filled-in"/>
+                  <span>L</span>
+                </label>
+              </td>
+              <td>
+                <label>
+                  <input type="checkbox" class="filled-in"/>
+                  <span>E</span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <button class="waves-effect waves-light btn 
+      blue accent-1 btn-ag-sec right" (click)="registerUser()">
+      {{ isNew ? 'Crear usuario' : 'Guardar cambios' }}
+      </button>
+    </div>
+  </div>
+</div>

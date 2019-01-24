@@ -1,0 +1,52 @@
+<a class="btn-floating btn-large waves-effect waves-light bg-blue" [routerLink]="['new']"><i class="material-icons">add</i></a>
+<div class="container">
+    <div class="row m-0">
+      <div class="input-field search-field z-depth-1 col s12">
+        <i class="material-icons prefix">search</i>
+        <input id="search" type="text" placeholder="Búsqueda" [(ngModel)]="search">
+      </div>
+    </div>
+    <div class="row">
+      <ul class="collapsible col s12" #table>
+          <ng-container *ngFor="let rol of ( search == '' ? rolls.rolls : ( rolls.rolls | filter: { nombre: search, id:search } ) );let i = index">
+            <li>
+              <div class="collapsible-header p-8">
+                <div class="flex-group">
+                  <div class="valign-wrapper">
+                    <i class="material-icons font-light-blue medium">account_circle</i>
+                    <dl class="list">
+                      <dt>{{i + 1}}| {{ rol.nombre }}</dt>
+                      <dt class="valign-wrapper">Activo:<i class="material-icons" [ngClass]="{'font-light-green': rol.status, 'font-red': !rol.status}">
+                          {{rol.status ? 'check_circle' : 'cancel' }}</i></dt>
+                    </dl>
+                  </div>
+                  <div>
+                    ID: {{ rol.id }}
+                  </div>
+                </div>
+              </div>
+              <div class="collapsible-body p-8">
+                <div class="flex-group">
+                    <div class="switch">
+                        <label>
+                          Inactivo
+                          <input type="checkbox" [checked]="rol.status">
+                          <span class="lever"></span>
+                          Activo
+                        </label>
+                      </div>
+                      <div>
+                        <a class="waves-effect waves-circle pt-8" [routerLink]="[rol.id]">
+                          <i class="material-icons font-blue tiny">edit</i>
+                        </a>
+                        <a class="waves-effect waves-circle pt-8">
+                          <i class="material-icons font-red tiny">delete</i>
+                        </a>
+                      </div>
+                  </div>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+    </div>
+  </div>

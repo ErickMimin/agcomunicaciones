@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://187.188.122.85:3000/baselinerest/',
+  sessionName: 'ag-current-user-desa'
 };
 
 /*

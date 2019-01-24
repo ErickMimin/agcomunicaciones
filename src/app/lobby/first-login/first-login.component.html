@@ -1,0 +1,41 @@
+<form class="col s12" [formGroup]="form" (submit)="changePassword($event)">
+    <div class="row">
+      <div class="col s12">
+        <h5 class="font-white m-0 center-align">Cambiar Contraseña</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field big-field col s6 offset-s3">
+        <i class="material-icons prefix">lock</i>
+        <input formControlName="user" type="password" placeholder="Contraseña temporal" formControlName="old">
+        <span class="font-red center-align" *ngIf="form.controls.old.errors?.required && isSubmitted">Este campo es requerido</span>
+      </div>
+      <ng-container formGroupName="passwords">
+        <div class="input-field big-field col s6 offset-s3">
+            <i class="material-icons prefix">lock</i>
+            <input formControlName="new" type="password" placeholder="Nueva Contraseña">
+            <span class="font-red center-align" *ngIf="form.controls.passwords.controls.new.errors?.required && isSubmitted">Este campo es requerido</span>
+          </div>
+          <div class="input-field big-field col s6 offset-s3">
+            <i class="material-icons prefix">lock</i>
+            <input formControlName="confirm" type="password" placeholder="Repetir Contraseña">
+            <span class="font-red center-align" *ngIf="form.controls.passwords.controls.confirm.errors?.required && isSubmitted">Este campo es requerido</span>
+          </div>
+          <span class="col s12 center-align font-red mb-8" *ngIf="form.controls.passwords.controls.confirm.errors?.MatchPassword">Las contraseñas no coinciden</span>
+      </ng-container>
+    </div>
+    <div class="col s6 offset-s3">
+        <div class="row">
+            <div class="col s4 p-0">
+                <button class="waves-effect waves-light btn blue accent-1 btn-ag-sec" [routerLink]="['..']">
+                  Cancelar
+                </button>
+            </div>
+            <div class="col s4 offset-s4 p-0">
+                <button class="waves-effect waves-light btn blue accent-1 btn-ag-sec" type="submit"> 
+                  Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+  </form>

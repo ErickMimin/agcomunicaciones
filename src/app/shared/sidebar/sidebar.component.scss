@@ -1,0 +1,55 @@
+@import '../../../assets/css/variables.scss';
+
+.side-img {
+    border-bottom: 2px solid $ag-green;
+    height: 6rem;
+    img{
+        margin-left: 1rem;
+        height: 100%;
+    }    
+}
+
+.sidenav{
+    background-color: $ag-white;
+    width: 18.75rem;
+    z-index: 1000;
+}
+
+.sidenav li~li{
+    margin-top: 8px;
+}
+
+.sidenav-trigger{
+    z-index: 750;
+    position: fixed;
+    color: $ag-dark-blue;
+    left: 1.5rem;
+    top: 1.5rem;
+    i{
+        font-size: 3rem;
+    }
+}
+
+.divider{
+    border-bottom: 2px solid $ag-green;
+}
+
+
+.link-active{
+    background: $ag-light-green;
+    background: -moz-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, $ag-light-green), color-stop(100%, $ag-white));
+    background: -webkit-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+    background: -o-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+    background: -ms-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+    background: linear-gradient(to right, $ag-light-green 0%, $ag-white 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bedb81', endColorstr='#e0ff9e', GradientType=1 );
+}
+
+.menu{
+    margin-bottom: 16px;
+    a{
+        cursor: initial;
+        pointer-events: none;
+    }
+}

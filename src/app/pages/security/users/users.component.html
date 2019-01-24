@@ -1,0 +1,57 @@
+ <a class="btn-floating btn-large waves-effect waves-light bg-blue" [routerLink]="['new']"><i class="material-icons">add</i></a>
+<div class="container">
+  <div class="row m-0">
+    <div class="input-field search-field z-depth-1 col s12">
+      <i class="material-icons prefix">search</i>
+      <input id="search" type="text" [(ngModel)]="search" placeholder="Búsqueda">
+    </div>
+  </div>
+  <div class="row">
+    <ul class="collapsible col s12" #table>
+      <ng-container *ngFor="let user of ( search == '' ? users : ( users | filter: { nombre_Usuario: search, telefono: search, correo: search, id: search} : false ));index as i;first as isFirst">
+        <li>
+          <div class="collapsible-header p-8">
+            <div class="flex-group">
+              <div class="valign-wrapper">
+                <i class="material-icons font-light-blue medium">account_circle</i>
+                <dl class="list">
+                  <dt>{{i + 1}}| {{ user.nombre_Usuario }}</dt>
+                  <dt>Email: {{ user.correo }}</dt>
+                  <dt>Móvil: {{ user.telefono }}</dt>
+                  <dt class="valign-wrapper">Activo:<i class="material-icons" [ngClass]="{'font-light-green': user.activo, 'font-red': !user.activo}">
+                    {{ user.activo ? 'check_circle' : 'cancel' }}</i></dt>
+                </dl>
+              </div>
+              <div>
+                ID: {{ user.id }}
+              </div>
+            </div>
+          </div>
+          <div class="collapsible-body p-8">
+            <div class="flex-group">
+                <div class="switch">
+                    <label>
+                      Inactivo
+                      <input type="checkbox" [checked]="user.activo">
+                      <span class="lever"></span>
+                      Activo
+                    </label>
+                  </div>
+                  <div>
+                    <a class="waves-effect waves-circle pt-8">
+                      <i class="material-icons font-blue tiny">sync</i>
+                    </a>
+                    <a class="waves-effect waves-circle pt-8" [routerLink]="[user.id]">
+                      <i class="material-icons font-blue tiny">edit</i>
+                    </a>
+                    <a class="waves-effect waves-circle pt-8">
+                      <i class="material-icons font-red tiny">delete</i>
+                    </a>
+                  </div>
+              </div>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

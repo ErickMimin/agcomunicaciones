@@ -1,0 +1,251 @@
+@import './variables.scss';
+
+html{
+    font-size: 16px;
+    font-family: $ag-font-family;
+}
+
+.login-content{
+    position: absolute;
+    top: 20vh;
+    right: 10vh;
+    width: 60vh;
+    height: 60vh;
+    background-color: $ag-dark-blue;
+    -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+            border-radius: 50%;
+    -webkit-box-shadow: 25vh 0 0 4vh $ag-light-blue;
+       -moz-box-shadow: 25vh 0 0 4vh $ag-light-blue;
+            box-shadow: 25vh 0 0 4vh $ag-light-blue;
+}
+
+.login-image{
+    position: absolute;
+    top: 30vh;
+    left: 20rem;
+    height: 30vh;
+}
+
+.form-container{
+    border: 2px solid $ag-gray;
+    padding: .5rem;
+    -webkit-border-radius: 16px;
+       -moz-border-radius: 16px;
+}
+
+.big-field{
+    border: none; 
+    height: 3rem;
+    padding-right: 1.5rem !important;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    background-color: $ag-white;
+    input, input:not(.browser-default):focus:not([readonly]){
+        border: none !important;
+        box-shadow: none;
+    }
+}
+
+.search-field{
+    border: none; 
+    height: 2rem;
+    background-color: $ag-white;
+    input, input:not(.browser-default):focus:not([readonly]){
+        border: none !important;
+        box-shadow: none !important;
+    }
+    i{
+        font-size: 1rem !important;
+    }
+    input{
+        height: 2rem !important;
+    }
+}
+
+.btn-ag-sec{
+    height: 1.5rem !important;
+    text-transform: none;
+    line-height: 1.5rem;
+    font-size: .75rem;
+    -webkit-border-radius: .75rem;
+       -moz-border-radius: .75rem;
+}
+
+.btn-alert{
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-transform: none;
+    font-size: .75rem !important;
+    padding: 0 .75rem !important;
+    -webkit-border-radius: .75rem !important;
+       -moz-border-radius: .75rem !important;
+}
+
+
+dl.list{
+    font-size: 1rem;
+    dt~dt, dt i{
+        font-size: .6rem;
+    }
+    dt i{
+        width: 1rem;
+    }
+}
+
+/* Backgroun colors */
+.bg-blue{
+    background-color: $ag-dark-blue;
+}
+
+.bg-light-blue{
+    background-color: $ag-light-blue;
+}
+
+/* Fonts color */
+.font-white{
+    color: $ag-white;
+}
+
+.font-red{
+    color: $ag-red;
+} 
+
+.font-blue{
+    color: $ag-dark-blue;
+}
+
+.font-light-blue{
+    color: $ag-light-blue;
+}
+
+.font-light-green{
+    color: $ag-light-green;
+}
+
+/* Alternative align */
+.flex-group{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Paddings */
+.p-0{
+    padding: 0 !important;
+}
+
+.p-8{
+    padding: 8px;
+}
+
+.pt-8{
+    padding-top: 8px;
+}
+
+.pb-8{
+    padding-bottom: 8px;
+}
+
+.p-x-1{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Margins */
+.m-0{
+    margin: 0 !important;
+}
+
+.mt-8{
+    margin-top: 8px;
+}
+
+.mt-16{
+    margin-top: 16px;
+}
+
+.mb-8{
+    margin-bottom: 8px;
+}
+
+.ml-8{
+    margin-left: 8px;
+}
+
+
+/* Adjusts materialize */
+.switch label input[type=checkbox]:checked+.lever{
+    background-color: $ag-light-blue;
+    &:after{
+        background-color: $ag-dark-blue;  
+    }
+}
+
+.input-field .prefix.active {
+    color: $ag-dark-blue;
+}
+
+/* label underline focus color */
+.input-field input:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid $ag-dark-blue;
+    box-shadow: 0 1px 0 0 $ag-dark-blue;
+}
+
+i.tiny{
+    width: 1.5rem;
+    font-size: 1.5rem !important;
+}
+
+i.medium{
+    width: 3rem;
+    font-size: 3rem !important;
+}
+
+.btn-floating{
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+}
+
+.btn-floating:hover{
+    background-color: $ag-light-blue;
+}
+
+.input-field input:focus + label {
+    color: $ag-dark-blue !important;
+}
+
+input[type="checkbox"].filled-in:checked+span:not(.lever):after{
+    border-color: $ag-light-green;
+    background-color: $ag-light-green;
+}
+
+table.striped{
+    tbody tr:nth-child(odd){
+        background: $ag-light-green;
+        background: -moz-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+        // background: -webkit-gradient(left top, right top, color-stop(0%, $ag-light-green), color-stop(100%, $ag-white));
+        // background: -webkit-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+        // background: -o-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+        // background: -ms-linear-gradient(left, $ag-light-green 0%, $ag-white 100%);
+        // background: linear-gradient(to right, $ag-light-green 0%, $ag-white 100%);
+        // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bedb81', endColorstr='#e0ff9e', GradientType=1 );
+    }
+    tbody tr:nth-child(even){
+        background: $ag-light-blue;
+        // background: -moz-linear-gradient(left, $ag-light-blue 0%, $ag-white 100%);
+        // background: -webkit-gradient(left top, right top, color-stop(0%, $ag-light-blue), color-stop(100%, $ag-white));
+        // background: -webkit-linear-gradient(left, $ag-light-blue 0%, $ag-white 100%);
+        // background: -o-linear-gradient(left, $ag-light-blue 0%, $ag-white 100%);
+        // background: -ms-linear-gradient(left, $ag-light-blue 0%, $ag-white 100%);
+        // background: linear-gradient(to right, $ag-light-blue 0%, $ag-white 100%);
+        // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bedb81', endColorstr='#e0ff9e', GradientType=1 );
+    }
+}
+
+.spinner-blue-only{
+    border-color: $ag-light-green;
+}

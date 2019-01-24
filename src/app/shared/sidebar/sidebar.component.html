@@ -1,0 +1,12 @@
+<ul id="slide-out" #sidenav class="sidenav sidenav-fixed side" style="transform: translateX(0px);">
+  <li class="side-img"><img src="assets/img/logo/logoag.svg" alt="logo"></li>
+  <li><a class="waves-effect" routerLink="/home" routerLinkActive="link-active"><i class="material-icons">home</i>Home</a></li>
+  <li><div class="divider"></div></li>
+  <li class="menu"><a><i class="material-icons">security</i>Seguridad</a></li>
+  <li><a class="waves-effect" routerLink="/security/users" routerLinkActive="link-active"><i class="material-icons">people</i>Usuarios</a></li>
+  <li><a class="waves-effect" routerLink="/security/rolls" routerLinkActive="link-active"><i class="material-icons">people</i>Roles y permisos</a></li>
+  <li><a class="waves-effect" routerLink="/security/change-password" routerLinkActive="link-active"><i class="material-icons">lock</i>cambiar contraseña</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="waves-effect" (click)="logOut()"><i class="material-icons">exit_to_app</i>Salir</a></li>
+</ul>
+<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>

@@ -1,0 +1,10 @@
+.forgot-pass{
+    cursor: pointer;
+    margin-top: .5rem;
+    color: #f5f7fa;
+    font-size: .75rem;
+}
+
+.forgot-pass:hover{
+    font-weight: 600;
+}

@@ -1,0 +1,56 @@
+// Theme Colors
+$theme-colors: ( primary: #15283b, secondary: #ec961f, success: #0CC27E, info: #1CBCD8, warning: #FFF3CD, danger: #6694f1, light: #f8f9fa, dark: #343a40);
+// Spacing
+$spacer: 1.5rem;
+$spacers: ( 0: 0, 1: ($spacer * .25), 2: ($spacer * .75), 3: $spacer, 4: ($spacer * 1.5), 5: ($spacer * 3)) !default;
+// Colors
+$ag-white: #f5f7fa;
+$ag-black: #242424;
+$ag-gray:#CDCDCD;
+$ag-dark-blue: #3e5f8a;
+$ag-green:#597d63;
+$ag-light-green: #a7bc9d;
+$ag-light-blue: #84adc1;
+$ag-red: #ec0000;
+// Fonts
+$ag-font-family: "Montserrat",
+"Segoe UI",
+Roboto,
+"Helvetica Neue",
+Arial,
+sans-serif;
+
+//
+$font-family-content: "Rubik",
+"Segoe UI",
+Roboto,
+"Helvetica Neue",
+Arial,
+sans-serif;
+$font-size-root: 16px;
+//colors app
+$primary-color: #fff;
+//
+$red-dark-color: #c01b1b;
+$red-disabled-color: #c01b1b;
+//
+$white-color: #fff;
+//
+$gray-color: #37474F;
+$gray-dark-color:#5e606c;
+$gray-dark-content-color:#e2e2e2;
+$gray-solid-color:#666;
+$gray-borders-color:#CDCDCD;
+$gray-clear-color:#f2f2f2;
+$gray-clear-content-color:#f7f7f7;
+//
+$blue-primary-color:#6694f1;
+//$blue-aqua-color:#009DA0;
+$blue-light-color:#B1D6FC;
+$blue-color:#4e96fc;
+$blue-disabled-color: #94c3ff;
+
+//
+$orange-color:#f5a623;
+//multimedia
+$url-background-body: url('../img/content/back_ground_body.jpg');

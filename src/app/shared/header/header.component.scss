@@ -1,0 +1,25 @@
+@import '../../../assets/css/variables.scss';
+
+.header{
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    height: 6rem;
+    background-color: $ag-white;
+    border-bottom: 2px solid $ag-gray;
+}
+
+.brand-logo{
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 6rem;
+    i{
+        height: 1rem;
+        line-height: 6rem;
+    }
+    color: $ag-black;
+}
+
+.brand-logo:hover{
+    font-weight: 600;
+}
