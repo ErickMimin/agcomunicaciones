@@ -18,20 +18,20 @@
       </div>
       <div class="col m6 s12 mt-16">
         <label class="col s6">
-          <input type="checkbox" class="filled-in" [checked]="user.person == 1" (change)="togglePerson()"/>
+          <input type="checkbox" class="filled-in" [checked]="form.value.user.Tipo_Persona == 1" (change)="togglePerson()"/>
           <span>Persona Física</span>
         </label>
         <label class="col s6">
-          <input type="checkbox" class="filled-in" [checked]="user.person == 2" (change)="togglePerson()"/>
+          <input type="checkbox" class="filled-in" [checked]="form.value.user.Tipo_Persona == 2" (change)="togglePerson()"/>
           <span>Persona Moral</span>
         </label>
       </div>
       <div class="input-field col m6 s12">
-        <input placeholder="RFC" type="text">
+        <input placeholder="RFC" type="text" formControlName="RFC">
         <label class="active">RFC</label>
       </div>
       <div class="input-field col m6 s12">
-        <input placeholder="Razón social" type="text">
+        <input placeholder="Razón social" type="text" formControlName="Razon_Social">
         <label class="active">Razón social</label>
       </div>
     </div><!--  User data -->
@@ -80,38 +80,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Usuarios</td>
-              <td>
-                <label>
-                  <input type="checkbox" class="filled-in"/>
-                  <span>L</span>
-                </label>
-              </td>
-              <td>
-                <label>
-                  <input type="checkbox" class="filled-in"/>
-                  <span>E</span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>Roles</td>
-              <td>
-                <label>
-                  <input type="checkbox" class="filled-in"/>
-                  <span>L</span>
-                </label>
-              </td>
-              <td>
-                <label>
-                  <input type="checkbox" class="filled-in"/>
-                  <span>E</span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>Ventas y recargas</td>
+            <tr *ngFor="let module of form.value.user.accesos">
+              <td>{{ module.nombre }}</td>
               <td>
                 <label>
                   <input type="checkbox" class="filled-in"/>

@@ -40,11 +40,56 @@ export class CommonService {
 	
   }
 
+  put(url: string, data: any): Observable<any>{
+	if (!PROD) console.log('PUT', url,'[data]', data);
+
+	return new Observable(observer => {
+		this._http.put(url, data, { headers: this.createHeader() })
+			.pipe(
+				map( (data: any) => this.extractData(data)),
+				catchError( error => this.handleError(error))
+			).subscribe((data) => {
+				if (data.success) {
+					observer.next(data);
+				} else {
+					observer.error(data);
+				}
+				observer.complete();
+			}, err => {
+				observer.error(err);
+				observer.complete();
+			});
+	});
+	
+  }
+
   get(url: string){
 	if (!PROD) console.log('GET', url);
 
 	return new Observable(observer => {
 		this._http.get(url, { headers: this.createHeader() })
+			.pipe(
+				map( (data: any) => this.extractData(data)),
+				catchError( error => this.handleError(error))
+			).subscribe((data) => {
+				if (data.success) {
+					observer.next(data);
+				} else {
+					observer.error(data);
+				}
+				observer.complete();
+			},err => {
+				observer.error(err);
+				observer.complete();
+			});
+	});
+  }
+
+  delete(url: string){
+	if (!PROD) console.log('DELETE', url);
+
+	return new Observable(observer => {
+		this._http.delete(url, { headers: this.createHeader() })
 			.pipe(
 				map( (data: any) => this.extractData(data)),
 				catchError( error => this.handleError(error))

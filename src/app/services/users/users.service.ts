@@ -8,7 +8,13 @@ import { CommonService } from '../shared/common.service';
 @Injectable()
 export class UsersService {
 urlService = BASE_URL + 'users/';
+urlService2 = BASE_URL + 'modulos';
+
   constructor(private _common: CommonService) { }
+
+  getModules(){
+    return this._common.get(this.urlService2);
+  }
 
   getUsers(): Observable<any>{
     return this._common.get(this.urlService);
@@ -24,6 +30,14 @@ urlService = BASE_URL + 'users/';
 
   registerUser(user: any){
     return this._common.post(this.urlService,{user: user});
+  }
+
+  updateUser(id: number, user: any){
+    return this._common.put(this.urlService + id,{user: user});
+  }
+
+  deleteUser(id: number){
+    return this._common.delete(this.urlService + id);
   }
 
 

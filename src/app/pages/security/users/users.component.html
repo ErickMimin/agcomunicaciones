@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <ul class="collapsible col s12" #table>
-      <ng-container *ngFor="let user of ( search == '' ? users : ( users | filter: { nombre_Usuario: search, telefono: search, correo: search, id: search} : false ));index as i;first as isFirst">
+      <ng-container *ngFor="let user of ( search == '' ? users : ( users | filter: { nombre_Usuario: search, telefono: search, correo: search, id: search} : false ));index as i;trackBy: trackByFn">
         <li>
           <div class="collapsible-header p-8">
             <div class="flex-group">
@@ -32,19 +32,19 @@
                 <div class="switch">
                     <label>
                       Inactivo
-                      <input type="checkbox" [checked]="user.activo">
+                      <input type="checkbox" [checked]="user.activo" (change)="toggleState(i)">
                       <span class="lever"></span>
                       Activo
                     </label>
                   </div>
                   <div>
-                    <a class="waves-effect waves-circle pt-8">
+                    <a class="waves-effect waves-circle pt-8" (click)="resetUsers(user.correo)">
                       <i class="material-icons font-blue tiny">sync</i>
                     </a>
                     <a class="waves-effect waves-circle pt-8" [routerLink]="[user.id]">
                       <i class="material-icons font-blue tiny">edit</i>
                     </a>
-                    <a class="waves-effect waves-circle pt-8">
+                    <a class="waves-effect waves-circle pt-8" (click)="deleteUser(user.id)">
                       <i class="material-icons font-red tiny">delete</i>
                     </a>
                   </div>
@@ -54,4 +54,4 @@
       </ng-container>
     </ul>
   </div>
-</div>
+</div> 

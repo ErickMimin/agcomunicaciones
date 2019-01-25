@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://187.188.122.85:3000/baselinerest/',
+  apiUrl: 'http://187.188.122.85:3000/ag-com-service/',
   sessionName: 'ag-current-user-desa'
 };
 
@@ -15,3 +15,4 @@ export const environment = {
  * because it will have a performance impact when errors are thrown
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// http://187.188.122.85:3000/baselinerest/

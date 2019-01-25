@@ -22,9 +22,7 @@ loginForm: FormGroup;
 
   ngOnInit() {
     if(this._user.isLogged()){
-      if(this._user.getUser().primer_Login)
-        this._router.navigate(['/login/change-password']);
-      else 
+      if(!this._user.getUser().primer_Login)
       this._router.navigate(['/home']);
     } 
     this.buildForm();

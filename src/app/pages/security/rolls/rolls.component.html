@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <ul class="collapsible col s12" #table>
-          <ng-container *ngFor="let rol of ( search == '' ? rolls.rolls : ( rolls.rolls | filter: { nombre: search, id:search } ) );let i = index">
+          <ng-container *ngFor="let rol of ( search == '' ? rolls : ( rolls | filter: { nombre: search, id:search } ) );let i = index;trackBy: trackByFn">
             <li>
               <div class="collapsible-header p-8">
                 <div class="flex-group">
@@ -16,8 +16,8 @@
                     <i class="material-icons font-light-blue medium">account_circle</i>
                     <dl class="list">
                       <dt>{{i + 1}}| {{ rol.nombre }}</dt>
-                      <dt class="valign-wrapper">Activo:<i class="material-icons" [ngClass]="{'font-light-green': rol.status, 'font-red': !rol.status}">
-                          {{rol.status ? 'check_circle' : 'cancel' }}</i></dt>
+                      <dt class="valign-wrapper">Activo:<i class="material-icons" [ngClass]="{'font-light-green': rol.activo, 'font-red': !rol.activo}">
+                          {{rol.activo ? 'check_circle' : 'cancel' }}</i></dt>
                     </dl>
                   </div>
                   <div>
@@ -30,7 +30,7 @@
                     <div class="switch">
                         <label>
                           Inactivo
-                          <input type="checkbox" [checked]="rol.status">
+                          <input type="checkbox" [checked]="rol.activo" (change)="toggleState(i)">
                           <span class="lever"></span>
                           Activo
                         </label>
@@ -39,7 +39,7 @@
                         <a class="waves-effect waves-circle pt-8" [routerLink]="[rol.id]">
                           <i class="material-icons font-blue tiny">edit</i>
                         </a>
-                        <a class="waves-effect waves-circle pt-8">
+                        <a class="waves-effect waves-circle pt-8" (click)="deleteRoll(rol.id)">
                           <i class="material-icons font-red tiny">delete</i>
                         </a>
                       </div>

@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container" [formGroup]="form">
   <div class="card form-container">
     <div class="row m-0">
       <div class="input-field col m6 s12">
-        <input placeholder="Nombre" type="text">
-        <label>Nombre</label>
+        <input placeholder="Nombre" type="text" formControlName="nombre">
+        <label class="active">Nombre</label>
       </div>
       <div class="input-field col m6 s12">
-        <input placeholder="Descripción" type="text">
-        <label>Descripción</label>
+        <input placeholder="Descripción" type="text" formControlName="descripcion">
+        <label class="active">Descripción</label>
       </div>
     </div>
     <div class="row">
@@ -22,23 +22,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Activación</td>
-              <td>
-                <label>
-                  <input type="checkbox" class="filled-in"/>
-                  <span>L</span>
-                </label>
-              </td>
-              <td>
-                <label>
-                  <input type="checkbox" class="filled-in"/>
-                  <span>E</span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>Activación y recarga</td>
+            <tr *ngFor="let module of form.value.accesos">
+              <td>{{ module.nombre }}</td>
               <td>
                 <label>
                   <input type="checkbox" class="filled-in"/>
@@ -55,6 +40,12 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="row">
+      <button class="waves-effect waves-light btn 
+      blue accent-1 btn-ag-sec right" (click)="registerRoll()">
+      {{ isNew ? 'Crear rol' : 'Guardar cambios' }}
+      </button>
     </div>
   </div>
 </div>

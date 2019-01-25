@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../../services/users/users.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { User } from '../../../../models/user.model';
 import { AlertsService } from '../../../../services/shared/alerts.service';
+import { CarrierService } from '../../../../services/carrier/carrier.service';
+import { LoaderService } from '../../../../services/shared/loader.service';
+import { RollsService } from '../../../../services/rolls/rolls.service';
 
 declare let $: any;
 @Component({
@@ -15,136 +18,130 @@ export class UsersDetailsComponent implements OnInit {
 @ViewChild('carrier') private carrier: ElementRef;
 form: FormGroup;
 isNew: boolean = false;
-carriers: any[] = [
-  {
-    "id": 1,
-    "nombre": "Telcel"
-  },
-  {
-    "id": 2,
-    "nombre": "Movistar"
-  },
-  {
-    "id": 3,
-    "nombre": "Att"
-  },
-  {
-    "id": 4,
-    "nombre": "Unefon"
-  },
-  {
-    "id": 5,
-    "nombre": "Iusacell"
-  },
-  {
-    "id": 6,
-    "nombre": "Virgin"
-  }
-];
-rolls: any = [
-  {
-    "id": 3,
-    "nombre": "a",
-    "accesos": [
-      {
-        "id": 10,
-        "nombre": "Usuarios",
-        "permiso": 2
-      },
-      {
-        "id": 11,
-        "nombre": "Roles",
-        "permiso": 2
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "nombre": "b",
-    "accesos": [
-      {
-        "id": 11,
-        "nombre": "Roles",
-        "permiso": 1
-      },
-      {
-        "id": 10,
-        "nombre": "Usuarios",
-        "permiso": 1
-      }
-    ]
-  }
-];
+carriers: any[] = [];
+rolls: any[] = [];
 user: any = {
-  nombre_Usuario: '',
-  person: 1
+  nombre_Usuario: ''
 };
   constructor(
     private _actroute: ActivatedRoute,
     private _users: UsersService,
     private _fb: FormBuilder,
-    private _alert: AlertsService
-    ) { }
-
-  ngOnInit() {    
-    this._actroute.params.subscribe(params => {
-      if(params.id){
-        this.isNew = false;
-        this._users.getUserById(params.id).subscribe(data =>{
-          this.user = data.responseResult.user;
-          for(let key in this.form.get('user').value){
-            this.form.get('user').get(key).setValue(this.user[key]);
-          }
-       });
-      }else this.isNew = true;
-          
-    });
-    this.buildForm();
-  }
-
+    private _alert: AlertsService,
+    private _router: Router,
+    private _carrier: CarrierService,
+    private _loader: LoaderService,
+    private _rolls: RollsService
+    ) { 
+    }
+    
+    ngOnInit() {    
+      this.buildForm();
+      this._actroute.params.subscribe(params => {
+        if(params.id){
+          this.isNew = false;
+          this._users.getUserById(params.id).subscribe(data =>{
+            this.user = data.responseResult.user;
+            delete this.user.accesos;
+            for(let key in this.form.value.user){
+              if(typeof this.user[key] === 'object')
+                this.form.get('user').get(key).get('id').setValue(this.user[key].id);
+              else if(key != 'accesos'){
+                this.form.get('user').get(key).setValue(this.user[key]);
+              }
+            }
+            
+            this._users.getModules().subscribe((data: any )=> {
+              data.responseResult.modulos.forEach(x => {
+                  (<FormArray>this.form.get('user').get('accesos')).push(this._fb.group({
+                    id: [x.id],
+                    nombre: [x.nombre]
+                  }));
+                });
+            });
+          });
+        }else{
+          this.isNew = true;
+        } 
+        
+      });
+    }
+    
   ngAfterViewInit(){    
-    $('select').formSelect();
+    this.fillFields();
   }
 
   buildForm(user?: User){
     this.form = this._fb.group({
       user: this._fb.group({
         nombre: ['', [Validators.required]],
+        RFC: ['', [Validators.required]],
+        Tipo_Persona: [1 , [Validators.required]],
+        Razon_Social: ['', [Validators.required]],
         apellido_Paterno: ['', [Validators.required]],
         apellido_Materno: ['', [Validators.required]],
         // rfc: ['', [Validators.required]],
         email: ['', [Validators.required]],
         telefono: ['', [Validators.required]],
         carrier: this._fb.group({
-          id: ['', [Validators.required]],
-          nombre: ['']
+          id: ['', [Validators.required]]
         }),
         rol: this._fb.group({
-          id: ['', [Validators.required]],
-          nombre: ['']
-        }) 
+          id: ['', [Validators.required]]
+        }),
+        accesos: this._fb.array([])
       })
     });
   }
 
+  fillFields(){ 
+    this._rolls.getRolls().subscribe(data => {
+      this.rolls = data.responseResult.rolls;
+    }, null, // por el momento
+    () => {
+      this._carrier.getCarriers().subscribe(data => {
+        this.carriers = data.responseResult.carrier[0];
+        setTimeout( () => $('select').formSelect(), 500); // Por el momento, quitar cuando se integre ng m
+      },err => {
+        setTimeout( () => $('select').formSelect(), 500); // Por el momento, quitar cuando se integre ng m
+      });
+    });
+  }
+
   togglePerson(){
-    if(this.user.person == 2) this.user.person = 1;
-    else this.user.person = 2;
+    if( this.form.value.user.Tipo_Persona == 2) this.form.get('user').get('Tipo_Persona').setValue(1);
+    else this.form.get('user').get('Tipo_Persona').setValue(2);
   }
 
   registerUser(){
     let user = this.form.get('user').value;
-    let id = this.form.value.user.carrier.id;
-    user.carrier.nombre = this.carriers.find(x => x.id == id).nombre;
-    let id2 = this.form.value.user.rol.id;
-    user.rol.nombre = this.rolls.find(x => x.id == id2).nombre;
-    console.log(user);
+    user.tipo_persona = this.form.get('user').value.Tipo_Persona;
+    user.razon_social = this.form.get('user').value.Razon_Social;
+    user.rfc = this.form.get('user').value.RFC;
+
+    this._loader.show();
     if(this.isNew){
       this._users.registerUser(user).subscribe(data => {
-        this._alert.success({text: 'El usuario ha sido creado exitosamente'});
+        this._loader.hide();
+        this._alert.success({text: 'El usuario ha sido creado exitosamente'}, 
+        () => {
+          this._router.navigate(['..'],{relativeTo: this._actroute});
+        });
       }, err => {
+        this._loader.hide();
         this._alert.error({text: err.responseMessage});
       });
+    } else {
+      this._users.updateUser(this.user.id, user).subscribe(data => {
+        this._loader.hide();
+        this._alert.success({text: 'El usuario ha sido actualizado exitosamente'}, 
+        () => {
+          this._router.navigate(['..'],{relativeTo: this._actroute});
+        });
+      }, err => {
+        this._loader.hide();
+        this._alert.error({text: err.responseMessage});
+      }); 
     }
   }
 

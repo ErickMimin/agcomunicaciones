@@ -138,7 +138,7 @@ dl.list{
 }
 
 .p-8{
-    padding: 8px;
+    padding: 8px !important;
 }
 
 .pt-8{
@@ -247,5 +247,5 @@ table.striped{
 }
 
 .spinner-blue-only{
-    border-color: $ag-light-green;
+    border-color: $ag-light-blue;
 }

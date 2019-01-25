@@ -11,6 +11,8 @@ import { AlertsService } from './shared/alerts.service';
 import { UsersService } from './users/users.service';
 import { RollsService } from './rolls/rolls.service';
 import { ChangePasswordService } from './user/change-password.service';
+import { CarrierService } from './carrier/carrier.service';
+import { LoaderService } from './shared/loader.service';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ChangePasswordService } from './user/change-password.service';
     UsersService,
     RollsService,
     ChangePasswordService,
-    LoginGuard
+    LoginGuard,
+    CarrierService,
+    LoaderService
   ],
   declarations: []
 })
